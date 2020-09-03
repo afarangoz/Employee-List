@@ -1,0 +1,96 @@
+
+<div class="container general-container">
+    <h2 class="text-center">Lista de Empleados</h2>
+    <div class="table-responsive table-width">
+        <table class="table table-striped  table-bordered"> 
+            <thead>
+                <tr>
+                    <th class="text-center" scope="col">
+                        Nombre
+                        <div>
+                            <input class="form-control form-control-sm" type="text" [(ngModel)]="nombre" placeholder="Filtro por Nombre">
+                        </div>
+                    </th>
+                    <th class="text-center" scope="col">Cargo
+                        <div>
+                            <input class="form-control form-control-sm" type="text" [(ngModel)]="cargo" placeholder="Filtro por Cargo">
+                        </div>
+                    </th>
+                    <th class="text-center" scope="col">Documento
+                        <div>
+                            <input class="form-control form-control-sm" type="text" [(ngModel)]="documento" placeholder="Filtro por Documento">
+                        </div>
+                    </th>
+                    <th class="text-center" scope="col">Tipo de Documento
+                        <div>
+                            <input class="form-control form-control-sm" type="text" [(ngModel)]="tipo_de_documento" placeholder="Filtro por Tipo de Documento">
+                        </div>
+                    </th>
+                    <th class="text-center" scope="col">Detalle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let employee of employees | employeeFilter: nombre: cargo: documento: tipo_de_documento">
+                    <td>{{employee.nombre}}</td>
+                    <td>{{employee.cargo}}</td>
+                    <td>{{employee.documento}}</td>
+                    <td>{{employee.tipo_de_documento}}</td>
+                    <td class="btn-search">
+                        <a href="" (click)="employeeSelected = employee" data-toggle="modal" data-target="#detailModal">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-lg">
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+          <h5 class="modal-title text-light" id="detailModalLabel">{{employeeSelected.nombre}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th scope="col">Cargo</th>
+                            <td>{{employeeSelected.cargo}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Documento</th>
+                            <td>{{employeeSelected.documento}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Tipo de Documento</th>
+                            <td>{{employeeSelected.tipo_de_documento}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Lugar de Nacimiento</th>
+                            <td>{{employeeSelected.lugar_nacimiento}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Fecha de Nacimiento</th>
+                            <td>{{employeeSelected.fecha_nacimiento}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Salario</th>
+                            <td>{{employeeSelected.salario}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Tipo de Sangre</th>
+                            <td>{{employeeSelected.tipo_de_Sangre}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
